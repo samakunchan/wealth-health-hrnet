@@ -2,20 +2,30 @@
   "name": "wealth-health-hrnet",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://samakunchan.github.io/wealth-health-hrnet",
   "dependencies": {
+    "@reduxjs/toolkit": "^2.2.5",
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^13.0.0",
     "@testing-library/user-event": "^13.2.1",
+    "cross-env": "^7.0.3",
+    "gh-pages": "^6.1.1",
+    "prettier": "^3.2.5",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
+    "react-redux": "^9.1.2",
     "react-scripts": "5.0.1",
+    "serve": "^14.2.3",
     "web-vitals": "^2.1.0"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "build-prod": "cross-env REACT_APP_ENV=gh-pages react-scripts build",
+    "format": "prettier --write \"src/**/*.js\" \"src/**/*.jsx\"",
+    "deploy": "gh-pages -d build && rm -rf build"
   },
   "eslintConfig": {
     "extends": [
