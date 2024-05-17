@@ -2,12 +2,10 @@
 [![](https://img.shields.io/badge/Projet-Projet_13-blue)]()
 [![](https://img.shields.io/badge/View_projet-Click_here-darkGreen)](https://samakunchan.github.io/wealth-health-hrnet/)
 
-# SportSee
+# Wealth Health HRnet
 
 Projet 14 Openclassrooms. <br>
-Site Internet pour une banque fictifs. Le but est de :
-- créer une application web permettant aux clients de se connecter et de gérer leurs comptes et leur profil.
-- spécifier des endpoints d'API nécessaires pour une éventuelle deuxième mission une fois que nous aurons terminé la première.
+Petite application de création utilisateur avec React. Le but est d'utiliser des librairies personnalisés en react basés sur des plugins JQuery obselète.
 
 ## Installation
 
