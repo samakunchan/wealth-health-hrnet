@@ -38,6 +38,10 @@ yarn build && serve -s build -l 4005
 yarn add prettier
 ```
 ```shell
+# react-router-dom
+yarn add react-router-dom
+```
+```shell
 # serve
 yarn add serve
 ```
