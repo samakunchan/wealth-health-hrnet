@@ -2,6 +2,7 @@
   "name": "wealth-health-hrnet",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://samakunchan.github.io/wealth-health-hrnet",
   "dependencies": {
     "@reduxjs/toolkit": "^2.2.5",
     "@testing-library/jest-dom": "^5.14.1",
