@@ -1,0 +1,66 @@
+/*.employee-create-form {*/
+/*    padding: 10%;*/
+/*    margin-top: 10%;*/
+/*}*/
+
+/*.left-inputs, .right-inputs {*/
+/*    flex: 0 0 50%;*/
+/*    max-width: 50%;*/
+/*}*/
+
+/*.save-btn {*/
+/*    float: right;*/
+/*    margin-top: 10%;*/
+/*    border: none;*/
+/*    border-radius: 1.5rem;*/
+/*    padding: 3%;*/
+/*    background: #0062cc;*/
+/*    color: #fff;*/
+/*    font-weight: 600;*/
+/*    width: 50%;*/
+/*    cursor: pointer;*/
+/*}*/
+
+/*.form-group {*/
+/*    margin-bottom: 1rem;*/
+/*}*/
+
+/*.form-control {*/
+/*    display: block;*/
+/*    width: 100%;*/
+/*    padding: .375rem .75rem;*/
+/*    font-size: 1rem;*/
+/*    line-height: 1.5;*/
+/*    color: #495057;*/
+/*    background-color: #fff;*/
+/*    background-clip: padding-box;*/
+/*    border: 1px solid #ced4da;*/
+/*    border-radius: .25rem;*/
+/*    transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;*/
+/*}*/
+
+.left-inputs, .right-inputs {
+    display: flex;
+    flex-direction: column;
+}
+
+label {
+    margin-bottom: 5px;
+}
+
+input, select {
+    margin-bottom: 15px;
+    padding: 5px;
+}
+
+.save-btn {
+    align-self: flex-end;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+
+.flex-colum {
+    display: flex;
+    flex-direction: column;
+}
+
