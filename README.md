@@ -22,7 +22,6 @@ Petite application de création utilisateur avec React. Le but est d'utiliser de
 
 Voir les rôles pour les tests ici : https://www.w3.org/TR/html-aria/#docconformance
 
-
 ## Build local
 
 T'inquiète, je n'installe pas `serve` en global, mais uniquement par projet.
@@ -37,22 +36,27 @@ yarn build && serve -s build -l 4005
 # prettier
 yarn add prettier
 ```
+
 ```shell
 # react-router-dom
 yarn add react-router-dom
 ```
+
 ```shell
 # serve
 yarn add serve
 ```
+
 ```shell
 # github pages
 yarn add gh-pages
 ```
+
 ```shell
 # for management environment
 yarn add cross-env
 ```
+
 ```shell
 # redux
 yarn add react-redux
