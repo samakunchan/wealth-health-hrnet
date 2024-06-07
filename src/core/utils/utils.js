@@ -70,3 +70,8 @@ export class Theme {
     }
   }
 }
+
+export class DateFormat {
+  static enFormat = 'dd/mm/yyyy';
+  static frFormat = 'dd/mm/yyyy';
+}

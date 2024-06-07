@@ -2,6 +2,7 @@ import './index.css';
 import { useEffect, useState } from 'react';
 import { OCModalComponent } from 'oc-modal';
 import 'oc-modal/dist/index.css';
+import DatetimePickerComponent from '../DatetimePikerComponent';
 
 // /**
 //  * Exemple de bouton close en composant.
@@ -74,22 +75,10 @@ const EmployeeCreateFormComponent = () => {
           />
 
           <label htmlFor={'birthDate'}>Date of Birth</label>
-          <input
-            type={'text'}
-            id={'birthDate'}
-            name={'birthDate'}
-            value={getValue('birthDate')}
-            onChange={handleChange}
-          />
+          <DatetimePickerComponent name={'birthDate'} setInputs={setInputs} />
 
           <label htmlFor={'startDate'}>Start Date</label>
-          <input
-            type={'text'}
-            id={'startDate'}
-            name={'startDate'}
-            value={getValue('startDate')}
-            onChange={handleChange}
-          />
+          <DatetimePickerComponent name={'startDate'} setInputs={setInputs} />
         </div>
 
         <div className={'right-inputs'}>
