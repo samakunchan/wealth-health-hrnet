@@ -3,6 +3,8 @@ import { useEffect, useState } from 'react';
 import { OCModalComponent } from 'oc-modal';
 import 'oc-modal/dist/index.css';
 import DatetimePickerComponent from '../DatetimePikerComponent';
+import MenuDropDownComponent from '../MenuDropDownComponent';
+import { MenuDropdown } from '../../core/utils/utils';
 
 // /**
 //  * Exemple de bouton close en composant.
@@ -109,13 +111,12 @@ const EmployeeCreateFormComponent = () => {
 
             <div className={'flex-colum'}>
               <label htmlFor={'state'}>State</label>
-              <select
-                id={'state'}
+              <MenuDropDownComponent
                 name={'state'}
-                value={getValue('state')}
-                onChange={handleChange}
-              ></select>
-
+                setInputs={setInputs}
+                menus={MenuDropdown.states.map(state => state.name)}
+                firstText={MenuDropdown.firstState().name}
+              />
               <label htmlFor={'zipCode'}>Zip Code</label>
               <input
                 type={'number'}
@@ -126,21 +127,14 @@ const EmployeeCreateFormComponent = () => {
               />
             </div>
           </fieldset>
-          <br />
 
           <label htmlFor={'department'}>Department</label>
-          <select
-            id={'department'}
+          <MenuDropDownComponent
             name={'department'}
-            value={getValue('department')}
-            onChange={handleChange}
-          >
-            <option value={'Sales'}>Sales</option>
-            <option value={'Marketing'}>Marketing</option>
-            <option value={'Engineering'}>Engineering</option>
-            <option value={'Human Resources'}>Human Resources</option>
-            <option value={'Legal'}>Legal</option>
-          </select>
+            setInputs={setInputs}
+            menus={MenuDropdown.departments}
+            firstText={'Select a department'}
+          />
         </div>
         <input type={'submit'} value={'Save'} className={'save-btn'} />
       </form>
