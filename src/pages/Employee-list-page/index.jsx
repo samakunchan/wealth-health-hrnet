@@ -1,15 +1,80 @@
 import './index.css';
 import { Link } from 'react-router-dom';
 import { RouteName } from '../../core/utils/utils';
+import DataTableComponent from '../../components/DataTableComponent';
 
 const EmployeeListPage = () => {
+  const datas = [
+    {
+      department: 'Engineering',
+      firstName: 'cédric',
+      lastName: 'badjah',
+      street: '12 rue de la paix',
+      city: 'MONTPELLIER',
+      zipCode: '34090',
+      birthDate: '14/06/2024',
+      startDate: '28/06/2024',
+      state: 'California',
+    },
+    {
+      department: 'Sales',
+      firstName: 'john',
+      lastName: 'doe',
+      street: '20 rue de la guerre',
+      city: 'PARIS',
+      zipCode: '75000',
+      birthDate: '14/06/2024',
+      startDate: '28/06/2024',
+      state: 'Alabama',
+    },
+    {
+      department: 'Marketing',
+      firstName: 'jeanne',
+      lastName: "d'huile",
+      street: '30 rue de la neutralité',
+      city: 'RENNES',
+      zipCode: '09000',
+      birthDate: '14/06/2024',
+      startDate: '28/06/2024',
+      state: 'New-York',
+    },
+  ];
+  const newOrderColumns = [
+    'firstName',
+    'lastName',
+    'birthDate',
+    'street',
+    'city',
+    'zipCode',
+    'state',
+    'department',
+    'startDate',
+  ];
+
+  const headersRenamed = [
+    'Prénom',
+    'Nom',
+    'Date de naissance',
+    'Adresse',
+    'Ville',
+    'Code postale',
+    'Etat',
+    'Département',
+    'Date de début',
+  ];
+
   return (
-    <div id={'employee-div'} className={'container-fluid'}>
-      <h1>Current Employees</h1>
-      {/** Remplacer la table par la lib */}
-      <table id={'employee-table'} className={'display'}></table>
-      <Link to={RouteName.home}>Home</Link>
-    </div>
+    <section>
+      <div id={'employee-div'} className={'container-fluid'}>
+        <h1>Current Employees</h1>
+        <Link to={RouteName.home}>Home</Link>
+        <DataTableComponent
+          datas={datas}
+          orderColumns={newOrderColumns}
+          headersRenamed={headersRenamed}
+        />
+      </div>
+    </section>
   );
 };
 

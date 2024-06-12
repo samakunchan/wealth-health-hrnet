@@ -335,3 +335,13 @@ export class MenuDropdown {
     return MenuDropdown.states.find((_, index) => index === 0);
   }
 }
+
+export class LibrarySort {
+  static oldSortString = (a, b) => (a.name > b.name ? 1 : -1);
+  // static newSortString = (a, b) => `${a.name}`.localeCompare(`${b.name}`);
+
+  static sortNumber = (a, b) => a - b;
+  static sortAsc = 'asc';
+  static sortDesc = 'desc';
+  static noSort = 'noSort';
+}
