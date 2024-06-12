@@ -2,9 +2,34 @@ import './index.css';
 import { Link } from 'react-router-dom';
 import { RouteName } from '../../core/utils/utils';
 import DataTableComponent from '../../components/DataTableComponent';
+import { useState } from 'react';
+
+const newOrderColumns = [
+  'firstName',
+  'lastName',
+  'birthDate',
+  'street',
+  'city',
+  'zipCode',
+  'state',
+  'department',
+  'startDate',
+];
+
+const headersRenamed = [
+  'Prénom',
+  'Nom',
+  'Date de naissance',
+  'Adresse',
+  'Ville',
+  'Code postale',
+  'Etat',
+  'Département',
+  'Date de début',
+];
 
 const EmployeeListPage = () => {
-  const datas = [
+  const [datas, setDatas] = useState([
     {
       department: 'Engineering',
       firstName: 'cédric',
@@ -38,30 +63,7 @@ const EmployeeListPage = () => {
       startDate: '28/06/2024',
       state: 'New-York',
     },
-  ];
-  const newOrderColumns = [
-    'firstName',
-    'lastName',
-    'birthDate',
-    'street',
-    'city',
-    'zipCode',
-    'state',
-    'department',
-    'startDate',
-  ];
-
-  const headersRenamed = [
-    'Prénom',
-    'Nom',
-    'Date de naissance',
-    'Adresse',
-    'Ville',
-    'Code postale',
-    'Etat',
-    'Département',
-    'Date de début',
-  ];
+  ]);
 
   return (
     <section>
@@ -70,6 +72,7 @@ const EmployeeListPage = () => {
         <Link to={RouteName.home}>Home</Link>
         <DataTableComponent
           datas={datas}
+          setDatas={setDatas}
           orderColumns={newOrderColumns}
           headersRenamed={headersRenamed}
         />

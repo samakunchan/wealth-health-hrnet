@@ -51,3 +51,8 @@ tr:hover {
     top: 3px;
     right: 0;
 }
+
+input[type='search'] {
+    width: 20%;
+    float: right;
+}

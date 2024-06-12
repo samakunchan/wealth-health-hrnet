@@ -8,7 +8,6 @@ export class DatatableService {
     datas,
     setDatasRows,
     headersWithNewNames,
-    datasRows,
     allRows,
   }) {
     const name = header.name;
@@ -37,10 +36,20 @@ export class DatatableService {
         );
         break;
       case typeof header === 'number':
-        setDatasRows(datasRows.sort(LibrarySort.sortNumber));
+        setDatasRows(datas.sort(LibrarySort.sortNumber));
         break;
       default:
         setDatasRows(allRows);
     }
+  }
+
+  static filterTable({ event, setDatasOrigin, setDatasRows, headersWithNewNames, datas }) {
+    const keywords = new RegExp(event.target.value, 'i');
+    const results = datas.filter(data => {
+      return JSON.stringify(data).match(keywords);
+    });
+    setDatasOrigin(results);
+    const allRows = results.map(data => headersWithNewNames.map(header => data[header]));
+    setDatasRows(allRows);
   }
 }
