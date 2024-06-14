@@ -34,13 +34,22 @@ export class DatatableService {
     }
   }
 
-  static filterTable({ event, setDatasOrigin, setDatasRows, headersWithNewNames, datas }) {
+  static filterTable({
+    event,
+    setDatasOrigin,
+    setDatasRows,
+    headersWithNewNames,
+    datas,
+    sizeFilter,
+  }) {
     const keywords = new RegExp(event.target.value, 'i');
-    const results = datas.filter(data => {
-      return JSON.stringify(data).match(keywords);
-    });
+
+    const results = datas.filter(data => JSON.stringify(data).match(keywords));
     setDatasOrigin(results);
-    const allRows = results.map(data => headersWithNewNames.map(header => data[header]));
+
+    const allRows = results
+      .map(data => headersWithNewNames.map(header => data[header]))
+      .slice(0, sizeFilter);
     setDatasRows(allRows);
   }
 

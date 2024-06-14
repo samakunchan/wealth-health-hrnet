@@ -56,3 +56,17 @@ input[type='search'] {
     width: 20%;
     float: right;
 }
+
+.select-size {
+    width: 50px;
+}
+
+.pagination {
+    display: flex;
+    justify-content: end;
+    margin: 1em 0;
+}
+
+.pagination span {
+    padding: 0 1em;
+}
