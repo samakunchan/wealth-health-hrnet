@@ -1,4 +1,4 @@
-import { LibrarySort } from '../utils/utils';
+import { LibrarySort } from '../../../core/utils/utils';
 
 export class DatatableService {
   static sortTable({
@@ -13,27 +13,18 @@ export class DatatableService {
     const name = header.name;
     switch (true) {
       case typeof name === 'string':
-        const headerFiltered = datasHeaders.map(data =>
-          data.name === name
-            ? {
-                ...data,
-                nameSort:
-                  data.nameSort === LibrarySort.sortAsc
-                    ? LibrarySort.sortDesc
-                    : LibrarySort.sortAsc,
-              }
-            : { ...data, nameSort: LibrarySort.noSort },
-        );
+        const headerFiltered = datasHeaders.map(data => DatatableService.updateHeader(data, name));
         setDatasHeaders(headerFiltered);
 
         const filteredDatasString =
           header.nameSort === LibrarySort.sortAsc
-            ? datas.sort((a, b) => (a[name] > b[name] ? 1 : -1))
-            : datas.sort((a, b) => (b[name] > a[name] ? 1 : -1));
-        // setDatasRows(filteredDatasString.map(Object.values));
-        setDatasRows(
-          filteredDatasString.map(data => headersWithNewNames.map(header => data[header])),
+            ? datas.sort((a, b) => (a[name].toLowerCase() > b[name].toLowerCase() ? 1 : -1))
+            : datas.sort((a, b) => (b[name].toLowerCase() > a[name].toLowerCase() ? 1 : -1));
+
+        const newRows = filteredDatasString.map(data =>
+          headersWithNewNames.map(header => data[header]),
         );
+        setDatasRows(newRows);
         break;
       case typeof header === 'number':
         setDatasRows(datas.sort(LibrarySort.sortNumber));
@@ -51,5 +42,16 @@ export class DatatableService {
     setDatasOrigin(results);
     const allRows = results.map(data => headersWithNewNames.map(header => data[header]));
     setDatasRows(allRows);
+  }
+
+  static updateHeader(data, name) {
+    const resetSortStatusHeader = { ...data, nameSort: LibrarySort.noSort };
+    const updateSortStatusHeader = {
+      ...data,
+      nameSort:
+        data[`nameSort`] === LibrarySort.sortAsc ? LibrarySort.sortDesc : LibrarySort.sortAsc,
+    };
+
+    return data[`name`] === name ? updateSortStatusHeader : resetSortStatusHeader;
   }
 }
