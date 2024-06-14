@@ -12,22 +12,29 @@ export class DatatableService {
   }) {
     const name = header.name;
     switch (true) {
-      case typeof name === 'string':
-        const headerFiltered = datasHeaders.map(data => DatatableService.updateHeader(data, name));
-        setDatasHeaders(headerFiltered);
+      case datas.every(data => typeof data[name] === 'string'):
+        setDatasHeaders(datasHeaders.map(data => DatatableService.updateHeader(data, name)));
 
         const filteredDatasString =
           header.nameSort === LibrarySort.sortAsc
             ? datas.sort((a, b) => (a[name].toLowerCase() > b[name].toLowerCase() ? 1 : -1))
             : datas.sort((a, b) => (b[name].toLowerCase() > a[name].toLowerCase() ? 1 : -1));
 
-        const newRows = filteredDatasString.map(data =>
-          headersWithNewNames.map(header => data[header]),
+        setDatasRows(
+          filteredDatasString.map(data => headersWithNewNames.map(header => data[header])),
         );
-        setDatasRows(newRows);
         break;
-      case typeof header === 'number':
-        setDatasRows(datas.sort(LibrarySort.sortNumber));
+      case datas.every(data => typeof data[name] === 'number'):
+        setDatasHeaders(datasHeaders.map(data => DatatableService.updateHeader(data, name)));
+
+        const filteredDatasNumber =
+          header.nameSort === LibrarySort.sortAsc
+            ? datas.sort((a, b) => Number(a[name]) - Number(b[name]))
+            : datas.sort((a, b) => Number(b[name]) - Number(a[name]));
+
+        setDatasRows(
+          filteredDatasNumber.map(data => headersWithNewNames.map(header => data[header])),
+        );
         break;
       default:
         setDatasRows(allRows);
