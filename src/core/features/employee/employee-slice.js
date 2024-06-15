@@ -1,82 +1,88 @@
 import {
-  AUTH_IS_IDLE,
-  AUTH_IS_LOADING,
-  AUTH_IS_REJECT,
-  AUTH_IS_SUCCEEDED,
-  AUTH_LOCALSTORAGE_NAME,
-  AUTH_LOGIN_NAME,
-  AUTH_LOGOUT_NAME,
-  AUTH_SLICE_NAME,
-  AUTH_TOKEN_DEFAULT_MESSAGE,
-  AUTH_TOKEN_LOCAL_STORAGE_MESSAGE,
+  ADD_EMPLOYEE,
+  EMPLOYEE_FORM_IS_IDLE,
+  EMPLOYEE_FORM_IS_LOADING,
+  EMPLOYEE_FORM_IS_REJECT,
+  EMPLOYEE_FORM_IS_SUCCEEDED,
+  EMPLOYEE_SLICE_NAME,
+  EMPLOYEES_IS_LOADING,
+  EMPLOYEES_IS_NOT_SUCCESSFULLY_LOADED,
+  EMPLOYEES_IS_SUCCESSFULLY_LOADED,
+  EMPLOYEES_KEY_STORAGE,
   ERROR_MESSAGE,
+  GET_EMPLOYEES,
 } from './employee-action-types';
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { EmployeeService } from './employee-service';
-
-const userService = new EmployeeService();
-
-export const authenticateUser = createAsyncThunk(AUTH_LOGIN_NAME, async ({ email, password }) => {
-  return userService.login({ email, password });
-});
-
-export const disconnectUser = createAsyncThunk(AUTH_LOGOUT_NAME, async ({ user }) => {
-  return userService.fakeLogout();
-});
 
 const initialState = {
-  accessToken: AUTH_TOKEN_DEFAULT_MESSAGE,
-  tokenFromLocalStorage: AUTH_TOKEN_LOCAL_STORAGE_MESSAGE,
-  status: AUTH_IS_IDLE,
+  employees: [],
+  status: EMPLOYEE_FORM_IS_IDLE,
   error: ERROR_MESSAGE,
   isProcessing: false,
 };
 
-const reducers = {
-  removeTokenToLocalStorage: () => {
-    localStorage.removeItem(AUTH_LOCALSTORAGE_NAME);
-  },
-};
+export const createOneEmployee = createAsyncThunk(ADD_EMPLOYEE, async ({ employee }) => {
+  if (employee === undefined) {
+    throw new Error(`Le formulaire n'est pas bien rempli.`);
+  }
+  if (localStorage.getItem(EMPLOYEES_KEY_STORAGE)) {
+    const storedEmployees = JSON.parse(localStorage.getItem(EMPLOYEES_KEY_STORAGE));
+    storedEmployees.concat(employee);
+    return storedEmployees.concat(employee);
+  }
+  return [employee];
+});
+
+export const readAllEmployees = createAsyncThunk(GET_EMPLOYEES, async () => {
+  if (localStorage.getItem(EMPLOYEES_KEY_STORAGE)) {
+    return JSON.parse(localStorage.getItem(EMPLOYEES_KEY_STORAGE));
+  }
+  return [];
+});
 
 export const { actions, reducer } = createSlice({
-  name: AUTH_SLICE_NAME,
+  name: EMPLOYEE_SLICE_NAME,
   initialState,
-  reducers,
   extraReducers(builder) {
     builder
-      .addCase(authenticateUser.pending, state => {
-        state.accessToken = AUTH_TOKEN_DEFAULT_MESSAGE;
-        state.tokenFromLocalStorage = AUTH_TOKEN_LOCAL_STORAGE_MESSAGE;
-        state.status = AUTH_IS_LOADING;
+      .addCase(createOneEmployee.pending, state => {
+        state.status = EMPLOYEE_FORM_IS_LOADING;
         state.error = ERROR_MESSAGE;
         state.isProcessing = true;
       })
-      .addCase(authenticateUser.fulfilled, (state, action) => {
-        state.status = AUTH_IS_SUCCEEDED;
-        state.accessToken = action.payload;
-        state.tokenFromLocalStorage = action.payload;
+      .addCase(createOneEmployee.fulfilled, (state, action) => {
+        state.status = EMPLOYEE_FORM_IS_SUCCEEDED;
         state.error = ERROR_MESSAGE;
         state.isProcessing = false;
-        localStorage.setItem(AUTH_LOCALSTORAGE_NAME, action.payload.toString());
+        state.employees = action.payload;
+        localStorage.setItem(EMPLOYEES_KEY_STORAGE, JSON.stringify(action.payload));
       })
-      .addCase(authenticateUser.rejected, (state, action) => {
-        state.status = AUTH_IS_REJECT;
-        state.accessToken = AUTH_TOKEN_DEFAULT_MESSAGE;
-        state.tokenFromLocalStorage = AUTH_TOKEN_LOCAL_STORAGE_MESSAGE;
+      .addCase(createOneEmployee.rejected, (state, action) => {
+        state.status = EMPLOYEE_FORM_IS_REJECT;
         state.error = action[`error`].message;
         state.isProcessing = false;
+      });
+
+    builder
+      .addCase(readAllEmployees.pending, state => {
+        state.status = EMPLOYEES_IS_LOADING;
+        state.error = ERROR_MESSAGE;
+        state.isProcessing = true;
       })
-      .addCase(disconnectUser.fulfilled, (state, action) => {
-        state.status = AUTH_IS_IDLE;
-        state.accessToken = AUTH_TOKEN_DEFAULT_MESSAGE;
-        state.tokenFromLocalStorage = AUTH_TOKEN_LOCAL_STORAGE_MESSAGE;
+      .addCase(readAllEmployees.fulfilled, (state, action) => {
+        state.status = EMPLOYEES_IS_SUCCESSFULLY_LOADED;
         state.error = ERROR_MESSAGE;
         state.isProcessing = false;
-        localStorage.removeItem(AUTH_LOCALSTORAGE_NAME);
+        state.employees = action.payload;
+      })
+      .addCase(readAllEmployees.rejected, (state, action) => {
+        state.status = EMPLOYEES_IS_NOT_SUCCESSFULLY_LOADED;
+        state.error = action[`error`].message;
+        state.isProcessing = false;
       });
   },
 });
 
-export const { removeTokenToLocalStorage } = actions;
+export const { resetStateForm } = actions;
 
 export default reducer;

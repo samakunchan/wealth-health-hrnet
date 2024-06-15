@@ -5,6 +5,10 @@ import 'oc-modal/dist/index.css';
 import DatetimePickerComponent from '../DatetimePikerComponent';
 import MenuDropDownComponent from '../MenuDropDownComponent';
 import { MenuDropdown } from '../../core/utils/utils';
+import { useDispatch, useSelector } from 'react-redux';
+import { selectEmployeeFormStatus } from '../../core/features/employee/employee-selector';
+import { EMPLOYEE_FORM_IS_SUCCEEDED } from '../../core/features/employee/employee-action-types';
+import { createOneEmployee } from '../../core/features/employee/employee-slice';
 
 // /**
 //  * Exemple de bouton close en composant.
@@ -25,6 +29,7 @@ const EmployeeCreateFormComponent = () => {
   const [isOpenModal, setIsOpenModal] = useState(false);
   const [message, setMessage] = useState('');
   const [inputs, setInputs] = useState({});
+  const dispatch = useDispatch();
 
   useEffect(() => {
     setInputs({ department: 'Sales' });
@@ -36,19 +41,34 @@ const EmployeeCreateFormComponent = () => {
     setInputs(values => ({ ...values, [name]: value }));
   };
 
-  const onSubmit = event => {
+  const employeeFormStatus = useSelector(selectEmployeeFormStatus);
+
+  const onSubmit = async event => {
     event.preventDefault();
-    if (
-      inputs['firstName'] &&
-      inputs['lastName'] &&
-      inputs['birthDate'] &&
-      inputs['startDate'] &&
-      inputs['department']
-    ) {
+    await dispatch(
+      createOneEmployee({
+        employee: {
+          ...inputs,
+          firstName: inputs['firstName'] !== undefined ? inputs['firstName'] : '',
+          lastName: inputs['lastName'] !== undefined ? inputs['lastName'] : '',
+          birthDate: inputs['birthDate'] !== undefined ? inputs['birthDate'] : '',
+          startDate: inputs['startDate'] !== undefined ? inputs['startDate'] : '',
+          street: inputs['street'] !== undefined ? inputs['street'] : '',
+          city: inputs['city'] !== undefined ? inputs['city'] : '',
+          state: inputs['state'] !== undefined ? inputs['state'] : '',
+          department: inputs['department'] !== undefined ? inputs['department'] : '',
+        },
+      }),
+    );
+  };
+
+  useEffect(() => {
+    if (employeeFormStatus === EMPLOYEE_FORM_IS_SUCCEEDED) {
       setMessage('Employee Created!');
       setIsOpenModal(true);
+      // dispatch(resetStateForm());
     }
-  };
+  }, [dispatch, employeeFormStatus]);
 
   const getValue = value => inputs[value] || '';
 
