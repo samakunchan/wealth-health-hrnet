@@ -14,15 +14,24 @@ export class DatatableService {
     switch (true) {
       case datas.every(data => typeof data[name] === 'string'):
         setDatasHeaders(datasHeaders.map(data => DatatableService.updateHeader(data, name)));
+        if (datas.every(data => new Date(data[name]).toString() !== 'Invalid Date')) {
+          const filteredDatasDate =
+            header.nameSort === LibrarySort.sortAsc
+              ? datas.sort((a, b) => (new Date(a[name]) > new Date(b[name]) ? 1 : -1))
+              : datas.sort((a, b) => (new Date(b[name]) > new Date(a[name]) ? 1 : -1));
+          setDatasRows(
+            filteredDatasDate.map(data => headersWithNewNames.map(header => data[header])),
+          );
+        } else {
+          const filteredDatasString =
+            header.nameSort === LibrarySort.sortAsc
+              ? datas.sort((a, b) => (a[name].toLowerCase() > b[name].toLowerCase() ? 1 : -1))
+              : datas.sort((a, b) => (b[name].toLowerCase() > a[name].toLowerCase() ? 1 : -1));
 
-        const filteredDatasString =
-          header.nameSort === LibrarySort.sortAsc
-            ? datas.sort((a, b) => (a[name].toLowerCase() > b[name].toLowerCase() ? 1 : -1))
-            : datas.sort((a, b) => (b[name].toLowerCase() > a[name].toLowerCase() ? 1 : -1));
-
-        setDatasRows(
-          filteredDatasString.map(data => headersWithNewNames.map(header => data[header])),
-        );
+          setDatasRows(
+            filteredDatasString.map(data => headersWithNewNames.map(header => data[header])),
+          );
+        }
         break;
       case datas.every(data => typeof data[name] === 'number'):
         setDatasHeaders(datasHeaders.map(data => DatatableService.updateHeader(data, name)));
