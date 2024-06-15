@@ -334,6 +334,10 @@ export class MenuDropdown {
   static firstState() {
     return MenuDropdown.states.find((_, index) => index === 0);
   }
+
+  static firstDepartment() {
+    return MenuDropdown.departments.find((_, index) => index === 0);
+  }
 }
 
 export class LibrarySort {

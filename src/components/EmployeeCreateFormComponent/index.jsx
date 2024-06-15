@@ -133,7 +133,7 @@ const EmployeeCreateFormComponent = () => {
             name={'department'}
             setInputs={setInputs}
             menus={MenuDropdown.departments}
-            firstText={'Select a department'}
+            firstText={MenuDropdown.firstDepartment()}
           />
         </div>
         <input type={'submit'} value={'Save'} className={'save-btn'} />
