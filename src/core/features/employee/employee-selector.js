@@ -1,2 +1,2 @@
-export const selectAuthToken = state => state.employeeStore.accessToken;
-export const selectAuthInProccess = state => state.employeeStore.isProcessing;
+export const selectListEmployees = state => state.employeeStore.employees;
+export const selectEmployeeFormStatus = state => state.employeeStore.status;

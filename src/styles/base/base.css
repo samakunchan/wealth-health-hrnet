@@ -252,6 +252,7 @@ select option {
 .address {
     border: solid 1px;
     width: 97%;
+    margin: 0 0 15px 0;
 }
 
 .address input {

@@ -21,19 +21,18 @@ jobs:
           node-version: '16'
 
       - name: 📚 Installation des dépendances
-        run: |
-          npm install
+        run: yarn
 
       - name: 🔨 Construction du projet
         run: |
-          npm run build-prod
+          yarn build-prod
 
       - name: 🛂 Deploiement du projet
         run: |
           git config --global user.name $user_name
           git config --global user.email $user_email
           git remote set-url origin https://${github_token}@github.com/${repository}
-          npm run deploy
+          yarn deploy
         env:
           user_name: 'github-actions[bot]'
           user_email: 'github-actions[bot]@users.noreply.github.com'
