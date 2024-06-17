@@ -1,8 +1,13 @@
 import EmployeeCreateFormComponent from '../../components/EmployeeCreateFormComponent';
 import NavigateToEmployeeListComponent from '../../components/NavigateToEmployeeListComponent';
-import { RouteName } from '../../core/utils/utils';
+import {RouteName} from '../../core/utils/utils';
 import TitleComponent from '../../components/TitleComponent';
 
+/**
+ * Composant EmployeeListPage
+ * @return {JSX.Element}
+ * @constructor
+ */
 const HomePage = () => {
   return (
     <section>

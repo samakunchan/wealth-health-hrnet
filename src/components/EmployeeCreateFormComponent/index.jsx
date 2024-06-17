@@ -160,7 +160,7 @@ const EmployeeCreateFormComponent = () => {
       <OCModalComponent
         message={message}
         isModalActive={isOpenModal}
-        updateModal={closeModal}
+        closeModal={closeModal}
         // closeBtnChidlren={<CloseBtnChidlren setIsOpenModal={setIsOpenModal} />}
       />
     </div>

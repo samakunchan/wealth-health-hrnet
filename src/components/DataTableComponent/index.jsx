@@ -1,10 +1,18 @@
 import './index.css';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { useState } from 'react';
-import { LibrarySort } from '../../core/utils/utils';
-import { faCaretDown, faCaretUp } from '@fortawesome/free-solid-svg-icons';
-import { DatatableService } from './services/datatable-service';
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
+import {useState} from 'react';
+import {LibrarySort} from '../../core/utils/utils';
+import {faCaretDown, faCaretUp} from '@fortawesome/free-solid-svg-icons';
+import {DatatableService} from './services/datatable-service';
 
+/**
+ * Composant Datatable
+ * @param datas {[]}
+ * @param orderColumns {[]}
+ * @param headersRenamed {[]}
+ * @return {JSX.Element}
+ * @constructor
+ */
 const DataTableComponent = ({ datas = [], orderColumns = [], headersRenamed = [] }) => {
   const firstSizeFilter = 10;
   const [sizeFilter, setSizeFilter] = useState(firstSizeFilter);
