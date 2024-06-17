@@ -1,0 +1,12 @@
+export const ERROR_MESSAGE = '[no error for now]';
+export const EMPLOYEE_SLICE_NAME = 'Employee slice';
+export const EMPLOYEE_FORM_IS_IDLE = 'Employee form is idle';
+export const EMPLOYEE_FORM_IS_LOADING = 'Employee form is loading';
+export const EMPLOYEE_FORM_IS_SUCCEEDED = 'Employee form is succeeded';
+export const EMPLOYEE_FORM_IS_REJECT = 'Employee form is failure';
+export const EMPLOYEES_KEY_STORAGE = 'employees';
+export const ADD_EMPLOYEE = 'Employee/Add';
+export const GET_EMPLOYEES = 'Employees/List';
+export const EMPLOYEES_IS_LOADING = 'Employees list is loading';
+export const EMPLOYEES_IS_SUCCESSFULLY_LOADED = 'Employees is successfully loaded';
+export const EMPLOYEES_IS_NOT_SUCCESSFULLY_LOADED = 'Employees is not successfully loaded';

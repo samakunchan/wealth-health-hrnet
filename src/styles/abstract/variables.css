@@ -1,0 +1,10 @@
+:root {
+    --default: #312E2E;
+    --primary-color: #3931af;
+    --secondary-color: #00c6ff;
+    --linear-gradient: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+    --font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+    --timing: .3s;
+}
