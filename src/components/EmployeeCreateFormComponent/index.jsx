@@ -1,14 +1,14 @@
 import './index.css';
 import { useEffect, useState } from 'react';
-import { OCModalComponent } from 'oc-modal';
-import 'oc-modal/dist/index.css';
+import { OCModalComponent } from '@samakunchan/oc-modal';
+import '@samakunchan/oc-modal/dist/index.css';
 import DatetimePickerComponent from '../DatetimePikerComponent';
 import MenuDropDownComponent from '../MenuDropDownComponent';
 import { MenuDropdown } from '../../core/utils/utils';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectEmployeeFormStatus } from '../../core/features/employee/employee-selector';
 import { EMPLOYEE_FORM_IS_SUCCEEDED } from '../../core/features/employee/employee-action-types';
-import { createOneEmployee } from '../../core/features/employee/employee-slice';
+import { createOneEmployee } from '../../core/features/employee/employee-slice'; // /**
 
 // /**
 //  * Exemple de bouton close en composant.
