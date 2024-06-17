@@ -66,7 +66,6 @@ const EmployeeCreateFormComponent = () => {
     if (employeeFormStatus === EMPLOYEE_FORM_IS_SUCCEEDED) {
       setMessage('Employee Created!');
       setIsOpenModal(true);
-      // dispatch(resetStateForm());
     }
   }, [dispatch, employeeFormStatus]);
 

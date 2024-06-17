@@ -5,7 +5,7 @@
 # Wealth Health HRnet
 
 Projet 14 Openclassrooms. <br>
-Petite application de création utilisateur avec React. Le but est d'utiliser des librairies personnalisés en react basés sur des plugins JQuery obselète.
+Petite application de création utilisateur avec React. Le but est d'utiliser des librairies personnalisées en react basés sur des plugins JQuery obsolete.
 
 ## Installation
 
