@@ -1,6 +1,19 @@
-import { LibrarySort } from '../../../core/utils/utils';
+import {LibrarySort} from '../../../core/utils/utils';
 
+/**
+ * Service afin de gérer les datatables
+ */
 export class DatatableService {
+  /**
+   * Tri les colonnes.
+   * @param header {{name: string, nameSort: string}} Nom du header selectionner.
+   * @param setDatasHeaders {function} Pour changer le state des headers.
+   * @param datasHeaders {string[]} Tout les headers.
+   * @param setDatasRows {function} Pour changer le state des données d'origine.
+   * @param datas {string[]} Données d'origine pour le tri proprement.
+   * @param headersWithNewNames {string[]} Tout les headers avec un nouveau nom.
+   * @param allRows Données travailler.
+   */
   static sortTable({
     header,
     datasHeaders,
@@ -13,7 +26,7 @@ export class DatatableService {
     const name = header.name;
     switch (true) {
       case datas.every(data => typeof data[name] === 'string'):
-        setDatasHeaders(datasHeaders.map(data => DatatableService.updateHeader(data, name)));
+        setDatasHeaders(datasHeaders.map(data => DatatableService._updateHeader(data, name)));
         if (datas.every(data => new Date(data[name]).toString() !== 'Invalid Date')) {
           const filteredDatasDate =
             header.nameSort === LibrarySort.sortAsc
@@ -34,7 +47,7 @@ export class DatatableService {
         }
         break;
       case datas.every(data => typeof data[name] === 'number'):
-        setDatasHeaders(datasHeaders.map(data => DatatableService.updateHeader(data, name)));
+        setDatasHeaders(datasHeaders.map(data => DatatableService._updateHeader(data, name)));
 
         const filteredDatasNumber =
           header.nameSort === LibrarySort.sortAsc
@@ -46,10 +59,20 @@ export class DatatableService {
         );
         break;
       default:
+        // const allRows = datas.map(data => headersWithNewNames.map(header => data[header]));
         setDatasRows(allRows);
     }
   }
 
+  /**
+   * Pour le champ de recherche
+   * @param event {ChangeEvent} Event change
+   * @param setDatasOrigin {function} Pour changer le state des données d'origine.
+   * @param setDatasRows {function} Pour changer le state des données travaillées.
+   * @param headersWithNewNames {string[]} Tout les headers
+   * @param datas {string[]} Données d'origines
+   * @param sizeFilter {number} Nombre de ligne max
+   */
   static filterTable({
     event,
     setDatasOrigin,
@@ -69,14 +92,21 @@ export class DatatableService {
     setDatasRows(allRows);
   }
 
-  static updateHeader(data, name) {
-    const resetSortStatusHeader = { ...data, nameSort: LibrarySort.noSort };
+  /**
+   * Gére les headers qui sont ascendants ou descendants
+   * @param header {{name: string, nameSort: string}} Nom du header selectionnée.
+   * @param name {string} Nom du header
+   * @return {*|{nameSort: (string)}|{nameSort: string}}
+   * @private
+   */
+  static _updateHeader(header, name) {
+    const resetSortStatusHeader = { ...header, nameSort: LibrarySort.noSort };
     const updateSortStatusHeader = {
-      ...data,
+      ...header,
       nameSort:
-        data[`nameSort`] === LibrarySort.sortAsc ? LibrarySort.sortDesc : LibrarySort.sortAsc,
+        header[`nameSort`] === LibrarySort.sortAsc ? LibrarySort.sortDesc : LibrarySort.sortAsc,
     };
 
-    return data[`name`] === name ? updateSortStatusHeader : resetSortStatusHeader;
+    return header[`name`] === name ? updateSortStatusHeader : resetSortStatusHeader;
   }
 }

@@ -2753,10 +2753,10 @@
   resolved "https://registry.yarnpkg.com/@rushstack/eslint-patch/-/eslint-patch-1.10.3.tgz#391d528054f758f81e53210f1a1eebcf1a8b1d20"
   integrity sha512-qC/xYId4NMebE6w/V33Fh9gWxLgURiNYgVNObbJl2LZv0GUUItCcCqC5axQSwRaAgaxl2mELq1rMzlswaQ0Zxg==
 
-"@samakunchan/oc-modal@^1.0.1":
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/@samakunchan/oc-modal/-/oc-modal-1.0.1.tgz#177c24c0c630d94063bc02506995204a4af23ac5"
-  integrity sha512-l7PGKkXIBkEHZQPvY6ckkfSj8oVXcHGYP2tzx8zsRc5/EQwNFsV/WQUaVZD3XglzGWt1JC2gb2SvsXBu4LCf7Q==
+"@samakunchan/oc-modal@^1.0.2":
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/@samakunchan/oc-modal/-/oc-modal-1.0.2.tgz#193d72fffd63c415be766e6b307cd9d09eace1c9"
+  integrity sha512-dHGQNDL2A346PB93so7j3o/LRwlIkk/UoDDov+gBL1274Ur6S55RTnxNBGrsdRiyzoDwlvN+wgN5OyOt4m82tA==
   dependencies:
     styled-component "^2.8.0"
     styled-components "^6.1.11"

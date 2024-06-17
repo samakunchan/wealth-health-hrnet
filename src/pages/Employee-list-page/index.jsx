@@ -33,6 +33,11 @@ import { readAllEmployees } from '../../core/features/employee/employee-slice';
 //   'Date de début',
 // ];
 
+/**
+ * Composant EmployeeListPage
+ * @return {JSX.Element}
+ * @constructor
+ */
 const EmployeeListPage = () => {
   const dispatch = useDispatch();
   const listEmployees = useSelector(selectListEmployees);
